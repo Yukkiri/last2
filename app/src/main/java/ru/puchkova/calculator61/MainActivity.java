@@ -1,13 +1,24 @@
 package ru.puchkova.calculator61;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private Button subtraction;
     private Button addition;
     private Button equal;
+
+    private Button background;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         addition = findViewById(R.id.addition);
         equal = findViewById(R.id.equal);
 
+
         Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/calc.ttf");
         computation.setTypeface(typeFace);
         calc.setTypeface(typeFace);
@@ -92,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
         addition.setOnClickListener(onClickListener);
         subtraction.setOnClickListener(onClickListener);
         equal.setOnClickListener(onClickListener);
+
+        background = findViewById(R.id.background);
+        background.setOnClickListener(backOnClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -326,6 +345,29 @@ public class MainActivity extends AppCompatActivity {
                 computation.setText("");
                 calc.setText(calcString + sNumber);
 
+            }
+        }
+    }
+
+    View.OnClickListener backOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickIntent.setType("image/*");
+            startActivityForResult(pickIntent, 111);
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK){
+            Uri selectedMediaUri = data.getData();
+            if (selectedMediaUri.toString().contains("image")){
+                File file = new File(selectedMediaUri.getSchemeSpecificPart());
+                String filePath = file.getPath();
+                Drawable d = Drawable.createFromPath(filePath);
+                ConstraintLayout main = findViewById(R.id.main);
+                main.setBackground(d);
             }
         }
     }

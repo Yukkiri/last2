@@ -50,4 +50,5 @@
     <string name="tanh">tanh</string>
     <string name="pi">π</string>
     <string name="rand">Rand</string>
+    <string name="background">Фон</string>
 </resources>

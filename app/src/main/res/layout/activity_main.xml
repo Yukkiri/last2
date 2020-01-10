@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
@@ -471,5 +472,16 @@
         app:layout_constraintStart_toStartOf="@+id/computation"
         app:layout_constraintTop_toTopOf="@+id/computation"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/background"
+        android:layout_width="@dimen/back_width"
+        android:layout_height="@dimen/back_height"
+        android:text="@string/background"
+        android:background="@drawable/button_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bows"
+        app:layout_constraintTop_toBottomOf="@+id/equal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
