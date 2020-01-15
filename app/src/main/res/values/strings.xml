@@ -51,4 +51,5 @@
     <string name="pi">π</string>
     <string name="rand">Rand</string>
     <string name="background">Фон</string>
+    <string name="ok">ОК</string>
 </resources>

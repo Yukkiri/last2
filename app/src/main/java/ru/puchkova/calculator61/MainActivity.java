@@ -16,6 +16,8 @@ import android.provider.MediaStore;
 import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -47,16 +49,25 @@ public class MainActivity extends AppCompatActivity {
     private Button addition;
     private Button equal;
 
-    private Button background;
-
+    private ImageButton background;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String imagePath = getIntent().getStringExtra("background");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+
+        if (imagePath != null){
+            Drawable d = Drawable.createFromPath(imagePath);
+            ImageView background_image = findViewById(R.id.background_image);
+            background_image.setImageDrawable(d);
+            //ConstraintLayout main = findViewById(R.id.main);
+            //main.setBackground(d);
+        }
 
         init();
     }
@@ -352,24 +363,29 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+            /*Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             pickIntent.setType("image/*");
-            startActivityForResult(pickIntent, 111);
+            startActivityForResult(pickIntent, 111);*/
         }
     };
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK){
             Uri selectedMediaUri = data.getData();
             if (selectedMediaUri.toString().contains("image")){
                 File file = new File(selectedMediaUri.getSchemeSpecificPart());
-                String filePath = file.getPath();
+                final String docId = file.getPath();
+                final String[] split = docId.split(":");
+                final String filePath = split[1];
                 Drawable d = Drawable.createFromPath(filePath);
                 ConstraintLayout main = findViewById(R.id.main);
                 main.setBackground(d);
             }
         }
-    }
+    }*/
 }
 

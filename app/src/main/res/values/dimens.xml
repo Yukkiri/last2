@@ -15,4 +15,5 @@
     <dimen name="text_land_width">700dp</dimen>
     <dimen name="back_width">62dp</dimen>
     <dimen name="back_height">42dp</dimen>
+    <dimen name="textSize">20sp</dimen>
 </resources>
