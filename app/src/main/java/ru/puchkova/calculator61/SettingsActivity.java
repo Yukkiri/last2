@@ -35,8 +35,8 @@ public class SettingsActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                setResult(RESULT_CANCELED);
+                Intent intent = new Intent();
+                setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });
@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String imagePath = path.getText().toString();
                 if (!imagePath.equals("") && checkExist(imagePath)) {
-                    Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                    Intent intent = new Intent();
                     intent.putExtra("background", imagePath);
                     setResult(RESULT_OK, intent);
                     finish();
