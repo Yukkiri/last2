@@ -36,7 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(intent);
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });
@@ -48,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (!imagePath.equals("") && checkExist(imagePath)) {
                     Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                     intent.putExtra("background", imagePath);
-                    startActivity(intent);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Изображение не существует :(", Toast.LENGTH_SHORT).show();

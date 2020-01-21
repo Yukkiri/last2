@@ -54,20 +54,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final String imagePath = getIntent().getStringExtra("background");
+        //final String imagePath = getIntent().getStringExtra("background");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
 
-        if (imagePath != null){
+        /*if (imagePath != null){
             Drawable d = Drawable.createFromPath(imagePath);
             ImageView background_image = findViewById(R.id.background_image);
             background_image.setImageDrawable(d);
             //ConstraintLayout main = findViewById(R.id.main);
             //main.setBackground(d);
-        }
+        }*/
 
         init();
     }
@@ -364,18 +364,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-            finish();
-            /*Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            pickIntent.setType("image/*");
-            startActivityForResult(pickIntent, 111);*/
+            //startActivity(intent);
+            /*finish();
+            Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickIntent.setType("image/*");*/
+            startActivityForResult(intent, 111);
         }
     };
 
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK){
-            Uri selectedMediaUri = data.getData();
+            final String imagePath = getIntent().getStringExtra("background");
+            Drawable d = Drawable.createFromPath(imagePath);
+            // v это тоже не работает
+            //ImageView background_image = findViewById(R.id.background_image);
+            //background_image.setImageDrawable(d);
+            ConstraintLayout main = findViewById(R.id.main);
+            main.setBackground(d);
+            /*Uri selectedMediaUri = data.getData();
             if (selectedMediaUri.toString().contains("image")){
                 File file = new File(selectedMediaUri.getSchemeSpecificPart());
                 final String docId = file.getPath();
@@ -384,8 +391,9 @@ public class MainActivity extends AppCompatActivity {
                 Drawable d = Drawable.createFromPath(filePath);
                 ConstraintLayout main = findViewById(R.id.main);
                 main.setBackground(d);
-            }
+            }*/
         }
-    }*/
+    }
 }
 
+// /storage/emulated/0/Download/00869e054931aaf926a42874490c26a5.jpg
